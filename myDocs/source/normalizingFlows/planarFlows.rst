@@ -104,5 +104,7 @@ to be uniform. The definition of the density function can thus be represented as
 
 
 For :math:`z \in [1,4]`, the value of :math:`q_y(z)` is :math:`1`, and :math:`0` elsewhere. The transformation is
-trivial to visualize, and is shown below.
+trivial to visualize, and is shown below. [`reference <https://cs.uwaterloo.ca/~ppoupart/teaching/cs480-spring19/slides/cs480-lecture23.pdf>`_]
+
+.. image:: https://raw.githubusercontent.com/sankhaMukherjee/normalizingFlows/master/results/img/1d_normalizing_flow.png
 
