@@ -92,6 +92,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../usage/installation.html">installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">planarFlows</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#the-change-of-variables-formula">The change of variables formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#d-example">1D Example</a></li>
 </ul>
 </li>
 </ul>
@@ -172,7 +173,7 @@ Similarly, assume that <span class="math notranslate nohighlight">\(\mathbf z = 
 that <span class="math notranslate nohighlight">\(\mathbf z =f(\mathbf y)\)</span>. Such a mapping function can be represented as:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}z_0 &amp;=  f_0(\mathbf y) \\
-z_1 &amp;=  f_0(\mathbf y) \\
+z_1 &amp;=  f_1(\mathbf y) \\
 \vdots &amp;=  \vdots \\
 z_{n-1} &amp;=  f_{n-1}(\mathbf y)\end{split}\]</div>
 <p>Notice that any element of <span class="math notranslate nohighlight">\(\mathbf z\)</span> is dependent upon all elements of the
@@ -185,7 +186,62 @@ determine <span class="math notranslate nohighlight">\(q_z(\mathbf z)\)</span> i
 <p>As it turns out, this is possible using the Jacobian determinant <span class="math notranslate nohighlight">\(\nabla_{\mathbf y}\)</span>. The relationship
 is given as:</p>
 <div class="math notranslate nohighlight">
-\[q_{\mathbf z}(\mathbf z) = q_{\mathbf y}(\mathbf y) \left|  \det \nabla_{\mathbf y}f(\mathbf y)  \right|\]</div>
+\[q_{\mathbf z}(\mathbf z) = q_{\mathbf y}(\mathbf y) \left|  \det \nabla_{\mathbf y}f(\mathbf y)  \right|^{-1}\]</div>
+<p>Let’s make sure that we understand what this Jacobian determinant means with regard to the function <span class="math notranslate nohighlight">\(f\)</span>.
+Under these circumstances, the equation <span class="math notranslate nohighlight">\(\nabla_{\mathbf y}f(\mathbf y)\)</span> can be represented as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\nabla_{\mathbf y}f( \mathbf y  ) =
+\begin{bmatrix}
+\frac {\partial f_0} {\partial y_0} &amp; \frac {\partial f_0} {\partial y_1} &amp; \ldots &amp; \frac {\partial f_{0}} {\partial y_{n-1}} \\
+\frac {\partial f_1} {\partial y_0} &amp; \frac {\partial f_1} {\partial y_1} &amp; \ldots &amp; \frac {\partial f_{1}} {\partial y_{n-1}} \\
+\vdots &amp; \cdots &amp; &amp; \vdots \\
+\frac {\partial f_{n-1}} {\partial y_0} &amp; \frac {\partial f_{n-1}} {\partial y_1} &amp; \ldots &amp; \frac {\partial f_{n-1}} {\partial y_{n-1}} \\
+\end{bmatrix}\end{split}\]</div>
+<p>Calculating the determinant of this is significantly difficult in general. We shall look at some simple examples in the subsequent sections.</p>
+</div>
+<div class="section" id="d-example">
+<h2>1D Example<a class="headerlink" href="#d-example" title="Permalink to this headline">¶</a></h2>
+<p>Now, we shall look at a very simple 1D example. The details are as follows</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(y \in \mathbb R^1\)</span>, and is uniformly distributed from 0-1. i.e. <span class="math notranslate nohighlight">\(y \in [0,1]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(q_y(y) = 1\)</span> in the range <span class="math notranslate nohighlight">\([0,1]\)</span> and <span class="math notranslate nohighlight">\(q_y(y) = 0\)</span> everywhere else.</p></li>
+<li><p>We have a function mapping <span class="math notranslate nohighlight">\(z = f(y) = 1 + 3y\)</span></p></li>
+</ol>
+<p>Let’s calculate all the values mentioned above:</p>
+<ol class="arabic simple">
+<li><p>Calculation of the Jacobian. Since there is only a single value, we will only need to calculate
+the partial derivative with respect to a single variable</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\nabla_{\mathbf y}f(\mathbf y) = [\frac {\partial (1+3y)} {\partial y}]  = [3]\]</div>
+<ol class="arabic simple" start="2">
+<li><p>Calculating the determinant of this matrix:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\det \nabla_{\mathbf y}f(\mathbf y) = 3\]</div>
+<ol class="arabic simple" start="3">
+<li><p>Calculating the absolute value of the determinant of this matrix:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\left |\det \nabla_{\mathbf y}f(\mathbf y) \right| = 3\]</div>
+<ol class="arabic simple" start="4">
+<li><p>Calculating the inverse of the absolute value of the determinant of this matrix:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\left |\det \nabla_{\mathbf y}f(\mathbf y) \right|^{-1} = \frac 1 3\]</div>
+<p>This simple function is independent of <span class="math notranslate nohighlight">\(y\)</span> indicating that the density of <span class="math notranslate nohighlight">\(z\)</span> is also going
+to be uniform. The definition of the density function can thus be represented as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}q_{\mathbf z}(\mathbf z) &amp;= q_{\mathbf y}(\mathbf y) \left|  \det \nabla_{\mathbf y}f(\mathbf y)  \right|^{-1} \\
+                         &amp;= q_{\mathbf y}(\mathbf y) \frac 1 3   \\\end{split}\]</div>
+<ol class="arabic simple" start="5">
+<li><p>Calculate the inverse function <span class="math notranslate nohighlight">\(y = f^{-1}(z) = \frac z 3 - \frac 1 3\)</span>. Given this inverse transform, it should
+be possible to transform the densities as:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}q_{z}(z)  &amp;= q_{y}(y) \left|  \det \nabla_{y}f(y)  \right|^{-1} \\
+          &amp;= q_{y}(y) \frac 1 3   \\
+          &amp;= q_{y}( \frac z 3 - \frac 1 3 ) \frac 1 3\end{split}\]</div>
 </div>
 </div>
 

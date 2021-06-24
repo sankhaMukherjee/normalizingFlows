@@ -3,6 +3,19 @@
 This repository is going to contain test code for various
 algorithms related to normalizing flows. 
 
+# Documentation
+
+Detailed documentation is present [here](https://sankhamukherjee.github.io/normalizingFlows/index.html).
+
+In this repository, both the math, as well as the code for Normalizing flows as well as variational
+flows is present. This is a growing document, and information about new code/documentation will be
+added here, so it is easier to follow. 
+
+Documentation for the different parts of the project is present here:
+
+1. Planar flows 
+   1. [documentation](https://sankhamukherjee.github.io/normalizingFlows/normalizingFlows/planarFlows.html)
+
 
 
 # References
