@@ -13,4 +13,6 @@ algorithms related to normalizing flows.
 3. Medium [Normalizing Flows are not Magic](https://medium.com/swlh/normalizing-flows-are-not-magic-22752d0c924)
    1. Github [VINF](https://github.com/pierresegonne/VINF)
 4. Ar𝛘iv [Variational Inferece with Normalizing flows](https://arxiv.org/pdf/1505.05770.pdf)
+4. Ar𝛘iv [Normalizing Flows for Probabilistic Modeling and Inference](https://arxiv.org/pdf/1912.02762.pdf)
+5. Blog [Normalizing Flows Tutorial, Part 1: Distributions and Determinants](https://blog.evjang.com/2018/01/nf1.html)
 
