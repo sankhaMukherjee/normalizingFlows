@@ -87,3 +87,14 @@ Given this inverse transform, it should be possible to transform densities as:
               z_0^2 + z_1 + 1
               \end{bmatrix}
               \right) 
+
+
+Results 
+++++++++++
+
+We shall now specifically calcualte the distributions for :math:`\mathbf z` in two different ways.
+Specifically, first, we are going to sample from the distribution for :math:`y` and then transform
+these points into :math:`z`. 
+
+
+
