@@ -1,5 +1,5 @@
 Gaussian to banana distributions
-++++++++++++++++++++++++++++++++++++++
+================================
 
 We shall look at the following distribution:
 
@@ -93,8 +93,8 @@ Results
 ++++++++++
 
 We shall now specifically calcualte the distributions for :math:`\mathbf z` in two different ways.
-Specifically, first, we are going to sample from the distribution for :math:`y` and then transform
-these points into :math:`z`. 
+Specifically, first, we are going to sample from the distribution for :math:`\mathbf y` and then transform
+these points into :math:`\mathbf z`. 
 
 
 

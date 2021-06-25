@@ -14,8 +14,8 @@ added here, so it is easier to follow.
 
 Documentation for the different parts of the project is present here:
 
-1. Planar flows 
-   1. [documentation](https://sankhamukherjee.github.io/normalizingFlows/normalizingFlows/planarFlows.html)
+1. Mathematical background
+   1. [documentation](https://sankhamukherjee.github.io/normalizingFlows/normalizingFlows/math.html)
 
 
 
