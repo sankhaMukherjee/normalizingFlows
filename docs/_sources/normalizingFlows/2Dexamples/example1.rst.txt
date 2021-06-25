@@ -96,5 +96,13 @@ We shall now specifically calcualte the distributions for :math:`\mathbf z` in t
 Specifically, first, we are going to sample from the distribution for :math:`\mathbf y` and then transform
 these points into :math:`\mathbf z`. 
 
+The distribution for :math:`\mathbf y` is given by 
 
+.. math::
 
+       \mathbf y = \mathcal N \left( \mathbf y | \mathbf 0, \mathbf \Sigma = 
+       \begin{bmatrix}
+              1    & 0.95 \\
+              0.95 & 1
+       \end{bmatrix}
+       \right)

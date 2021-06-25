@@ -6,3 +6,5 @@ docs:
 	mv myDocs/build/html docs
 	touch docs/.nojekyll
 
+run:
+	python3 src/examples/banana-npy.py
