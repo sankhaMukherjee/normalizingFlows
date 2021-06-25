@@ -11,7 +11,7 @@ Welcome to normalizingFlows's documentation!
    :caption: Contents:
 
    usage/installation
-   normalizingFlows/planarFlows
+   normalizingFlows/math
 
 
 

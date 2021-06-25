@@ -1,7 +1,8 @@
 # Normalizing Flows
 
-This repository is going to contain test code for various
-algorithms related to normalizing flows. 
+This repository is going to contain test code for various algorithms related to normalizing flows. Most
+of the documentation in relation to normalizing flows and variational flows is very terse. In this repo,
+we whall cross the t's and dot the i's. This will finally be a self-contained tutorial.
 
 # Documentation
 
