@@ -129,11 +129,24 @@ Next, we shall map the points from the :math:`\mathbf y` space to the :math:`\ma
        :align: center
        :name: banana
 
-       The mapping of the points sampled in the gaussian distribution to the banana distribution. Notice
-       that we don't yet know the distribution of the banana distribution, and hence we dont know how
-       to color the points yet.
+       The mapping of the points sampled in the gaussian distribution to the banana distribution. 
 
+In :numref:`banana` notice that we don't yet know the distribution of the banana distribution, and hence we dont know how to 
+color the points yet. For this, we shall use the formula shown in part 5 of the calculations. Since the
+Jacobian determinant is 1, there is a one-to-one correspondence between the densities of the old point
+and the new points. Let us calculate this density using the formula 
+:math:`q_{\mathbf z}(\mathbf z) = q_{\mathbf y}(\mathbf y) \left|  \det \nabla_{\mathbf y}f(\mathbf y)  \right|^{-1}`. 
+See part 5 of the calculations above.
 
+.. figure:: https://raw.githubusercontent.com/sankhaMukherjee/normalizingFlows/master/results/img/0001_banana_color.png
+       :align: center
+       :name: banana_color
 
+       The mapping of the points sampled in the gaussian distribution to the banana distribution colored
+       with the knowledge of the probablity density at each point. 
+
+In :numref:`banana_color`, the colors of each of the points have been updated with the color corresponding to the PDF
+of the point. Notice that it peaks at (0,-1), consistent with the mapping that is expected from the mapping function
+:math:`f`.
 
 .. _Gaussian Distribution: https://en.wikipedia.org/wiki/Multivariate_normal_distribution
