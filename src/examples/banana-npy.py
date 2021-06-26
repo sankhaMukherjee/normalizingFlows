@@ -70,6 +70,8 @@ def plotGaussianDensity(xx, yy, vals, ys, colors, outFile):
         
         axs[i].arrow(0, -2.5, 0,  5, length_includes_head = True, zorder=100, head_length = 0.25, head_width=0.1, fc='k')
         axs[i].arrow(0,  2.5, 0, -5, length_includes_head = True, zorder=100, head_length = 0.25, head_width=0.1, fc='k')
+        axs[i].text(2.7, 0, '$y_0$', ha='center', va='center')
+        axs[i].text(0, 2.7, '$y_1$', ha='center', va='center')
 
         axs[i].arrow(-2.5, 0,  5, 0, length_includes_head = True, zorder=100, head_length = 0.25, head_width=0.1, fc='k')
         axs[i].arrow( 2.5, 0, -5, 0, length_includes_head = True, zorder=100, head_length = 0.25, head_width=0.1, fc='k')
@@ -115,26 +117,49 @@ def main():
     x = np.linspace(-3, 3, 100)
     y = np.linspace(-3, 3, 100)
     xx, yy = np.meshgrid(x, y, sparse=False)
-    xxf = xx.flatten()
-    yyf = yy.flatten()
-    vals = np.vstack((xxf, yyf)).T
-    vals = get2Ddensity(vals, mean, cov)
-    vals = vals.reshape(xx.shape)
+    xxf    = xx.flatten()
+    yyf    = yy.flatten()
+    vals   = np.vstack((xxf, yyf)).T
+    vals   = get2Ddensity(vals, mean, cov)
+    vals   = vals.reshape(xx.shape)
     
-
-    # -------------------------------------
-    # Sanity check
-    # -------------------------------------
-    # ySquares1 = (ysR @ ysC).flatten()
-    # ySquares2 = (ys**2).sum( axis=1 )
-
-    # print('ySquares1 ...')
-    # print(ySquares1)
-    # print('ySquares2 ...')
-    # print(ySquares2)
-    # print('difference ...')
-    # print(ySquares2 - ySquares1)
     
+    z0 = ys[:, 0]
+    z1 = ys[:, 1]
+    z1 = z1 - z0**2 -1
+    z  = np.vstack((z0, z1)).T
+    print(z.shape)
+
+    plt.figure(figsize=(3, 3))
+    axs = [
+        plt.axes([0,0,1,1], facecolor='None' ),
+        plt.axes([0,0,1,1], facecolor='None' ),
+    ]
+    axs[1].scatter(z[:,0], z[:,1], marker='.', c = 'blue', alpha=0.1, edgecolors='none', zorder=20)
+    axs[1].set_xlim([-4,4])
+    axs[1].set_ylim([-12, 2])
+
+    axs[1].arrow(0,  -11, 0,  12.5, length_includes_head = True, zorder=100, head_length = 0.5, head_width=0.12, fc='k')
+    axs[1].arrow(0,  1.5, 0, -12.5, length_includes_head = True, zorder=100, head_length = 0.5, head_width=0.12, fc='k')
+    axs[1].arrow(-3, 0,  6, 0, length_includes_head = True, zorder=100, head_length = 0.25, head_width=0.2, fc='k')
+    axs[1].arrow( 3, 0, -6, 0, length_includes_head = True, zorder=100, head_length = 0.25, head_width=0.2, fc='k')
+
+    for j in np.linspace(-10, -2, 5):
+        axs[1].plot([-0.15, 0.15], [j,j], color='k')
+        axs[1].text( 0.3, j, f'{j}', ha='left', va='center' )
+
+    for j in np.linspace(-2, 2, 5):
+        if j:
+            axs[1].plot([j, j], [-0.2, 0.2], color='k')
+            axs[1].text( j, -0.35, f'{j}', ha='center', va='top' )
+
+    axs[1].text(3.2, 0, '$z_0$', ha='center', va='center')
+    axs[1].text(0, 1.7, '$z_1$', ha='center', va='center')
+
+
+    outFile = 'results/img/0001_banana.png'
+    plt.savefig(outFile)
+
     # -------------------------------------
     # Plot the results
     # -------------------------------------

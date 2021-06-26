@@ -100,9 +100,27 @@ The distribution for :math:`\mathbf y` is given by
 
 .. math::
 
-       \mathbf y = \mathcal N \left( \mathbf y | \mathbf 0, \mathbf \Sigma = 
+       p_{\mathbf y}(\mathbf y)
+       = \mathcal N \left( \mathbf y | \mathbf 0, \mathbf \Sigma = 
        \begin{bmatrix}
               1    & 0.95 \\
               0.95 & 1
        \end{bmatrix}
        \right)
+
+
+
+.. figure:: https://raw.githubusercontent.com/sankhaMukherjee/normalizingFlows/master/results/img/0001_gaussian.png
+       :align: center
+       :name: gaussian
+
+       (a) A contour plot of the distribution :math:`p_{\mathbf y}(\mathbf y)` is shown. This is estiamted
+       from the distribution density of the standard `Gaussian Distribution`_. In (b), samples form this
+       distribution have been drawn and plotted.
+
+In :numref:`gaussian` (a) the 2D Normal distribution has been plotted, while in :numref:`gaussian` (b), samples
+drawn from this distribution have been plotted. The color of each point corresponds to the value of the PDF at
+that point. In this case, we know the PDF for the Gaussian density at each point. 
+
+
+.. _Gaussian Distribution: https://en.wikipedia.org/wiki/Multivariate_normal_distribution

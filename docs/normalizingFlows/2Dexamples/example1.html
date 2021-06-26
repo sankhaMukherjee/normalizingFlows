@@ -255,12 +255,22 @@ Specifically, first, we are going to sample from the distribution for <span clas
 these points into <span class="math notranslate nohighlight">\(\mathbf z\)</span>.</p>
 <p>The distribution for <span class="math notranslate nohighlight">\(\mathbf y\)</span> is given by</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\mathbf y = \mathcal N \left( \mathbf y | \mathbf 0, \mathbf \Sigma =
+\[\begin{split}p_{\mathbf y}(\mathbf y)
+= \mathcal N \left( \mathbf y | \mathbf 0, \mathbf \Sigma =
 \begin{bmatrix}
        1    &amp; 0.95 \\
        0.95 &amp; 1
 \end{bmatrix}
 \right)\end{split}\]</div>
+<div class="figure align-center" id="gaussian">
+<img alt="https://raw.githubusercontent.com/sankhaMukherjee/normalizingFlows/master/results/img/0001_gaussian.png" src="https://raw.githubusercontent.com/sankhaMukherjee/normalizingFlows/master/results/img/0001_gaussian.png" />
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">(a) A contour plot of the distribution <span class="math notranslate nohighlight">\(p_{\mathbf y}(\mathbf y)\)</span> is shown. This is estiamted
+from the distribution density of the standard <a class="reference external" href="https://en.wikipedia.org/wiki/Multivariate_normal_distribution">Gaussian Distribution</a>. In (b), samples form this
+distribution have been drawn and plotted.</span><a class="headerlink" href="#gaussian" title="Permalink to this image">¶</a></p>
+</div>
+<p>In <a class="reference internal" href="#gaussian"><span class="std std-numref">Fig. 1</span></a> (a) the 2D Normal distribution has been plotted, while in <a class="reference internal" href="#gaussian"><span class="std std-numref">Fig. 1</span></a> (b), samples
+drawn from this distribution have been plotted. The color of each point corresponds to the value of the PDF at
+that point. In this case, we know the PDF for the Gaussian density at each point.</p>
 </div>
 </div>
 
