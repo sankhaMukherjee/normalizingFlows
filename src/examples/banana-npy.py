@@ -58,9 +58,11 @@ def plotGaussianDensity(xx, yy, vals, ys, colors, outFile):
 
     axs[0].contour( xx, yy, vals, levels=10, cmap='Blues', zorder=10 )
     axs[0].text(-2.5, 1.5, r'$p_{\mathbf y}( \mathbf y) = \mathcal N(\mathbf y| \mathbf 0, \mathbf \Sigma)$')
+    axs[0].text(-2.5, 2, r'(a)')
 
     axs[1].scatter(ys[:,0], ys[:,1], marker='.', c = colors, alpha=0.5, edgecolors='none', zorder=20)
     axs[1].text(-2.5, 1.5, r'$\mathbf y \sim p_{\mathbf y}( \mathbf y)$')
+    axs[1].text(-2.5, 2, r'(b)')
 
     for i in range(2):
         axs[i].set_xlim([-3,3])
