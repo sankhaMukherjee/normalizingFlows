@@ -123,4 +123,17 @@ drawn from this distribution have been plotted. The color of each point correspo
 that point. In this case, we know the PDF for the Gaussian density at each point. 
 
 
+
+
+.. figure:: https://raw.githubusercontent.com/sankhaMukherjee/normalizingFlows/master/results/img/0001_banana.png
+       :align: center
+       :name: banana
+
+       The mapping of the points sampled in the gaussian distribution to the banana distribution. Notice
+       that we don't yet know the distribution of the banana distribution, and hence we dont know how
+       to color the points yet.
+
+
+
+
 .. _Gaussian Distribution: https://en.wikipedia.org/wiki/Multivariate_normal_distribution

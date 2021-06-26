@@ -135,6 +135,12 @@ def main():
         plt.axes([0,0,1,1], facecolor='None' ),
         plt.axes([0,0,1,1], facecolor='None' ),
     ]
+    for ax in axs:
+        for s in ['right', 'top', 'left', 'bottom']:
+            ax.spines[s].set_visible(False)
+            ax.set_xticks([])
+            ax.set_yticks([])
+            
     axs[1].scatter(z[:,0], z[:,1], marker='.', c = 'blue', alpha=0.1, edgecolors='none', zorder=20)
     axs[1].set_xlim([-4,4])
     axs[1].set_ylim([-12, 2])
