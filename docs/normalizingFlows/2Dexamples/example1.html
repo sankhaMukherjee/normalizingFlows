@@ -202,7 +202,7 @@ y_1 - y_0^2 -1
 1        &amp; 0 \\
 -2 y_0    &amp; 1
 \end{bmatrix}\end{split}\]</div>
-<ol class="arabic simple">
+<ol class="arabic simple" start="2">
 <li><p>Calculating the determinant of this matrix. Thankfully, this is an lower-triangular matrix and its
 determinant is just the product of its diagonals. (Remember this informaiton. This will become very
 important later when we discuss normalizing flows).</p></li>
@@ -214,7 +214,7 @@ important later when we discuss normalizing flows).</p></li>
 -2 y_0    &amp; 1
 \end{bmatrix}
 = 1\end{split}\]</div>
-<ol class="arabic simple">
+<ol class="arabic simple" start="3">
 <li><p>Calculating the absolute value of the determinant of this matrix:</p></li>
 </ol>
 <div class="math notranslate nohighlight">
@@ -271,6 +271,8 @@ distribution have been drawn and plotted.</span><a class="headerlink" href="#gau
 <p>In <a class="reference internal" href="#gaussian"><span class="std std-numref">Fig. 1</span></a> (a) the 2D Normal distribution has been plotted, while in <a class="reference internal" href="#gaussian"><span class="std std-numref">Fig. 1</span></a> (b), samples
 drawn from this distribution have been plotted. The color of each point corresponds to the value of the PDF at
 that point. In this case, we know the PDF for the Gaussian density at each point.</p>
+<p>Next, we shall map the points from the <span class="math notranslate nohighlight">\(\mathbf y\)</span> space to the <span class="math notranslate nohighlight">\(\mathbf z\)</span> space using the transformation
+<span class="math notranslate nohighlight">\(\mathbf z = f(\mathbf y)\)</span>. See part 3 of the calculations above.</p>
 <div class="figure align-center" id="banana">
 <img alt="https://raw.githubusercontent.com/sankhaMukherjee/normalizingFlows/master/results/img/0001_banana.png" src="https://raw.githubusercontent.com/sankhaMukherjee/normalizingFlows/master/results/img/0001_banana.png" />
 <p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">The mapping of the points sampled in the gaussian distribution to the banana distribution. Notice

@@ -32,7 +32,7 @@ Let us follow the computations as we had done earlier:
        -2 y_0    & 1
        \end{bmatrix}  
 
-1. Calculating the determinant of this matrix. Thankfully, this is an lower-triangular matrix and its
+2. Calculating the determinant of this matrix. Thankfully, this is an lower-triangular matrix and its
    determinant is just the product of its diagonals. (Remember this informaiton. This will become very
    important later when we discuss normalizing flows).
 
@@ -45,7 +45,7 @@ Let us follow the computations as we had done earlier:
        \end{bmatrix}  
        = 1
 
-1. Calculating the absolute value of the determinant of this matrix:
+3. Calculating the absolute value of the determinant of this matrix:
 
 .. math::
 
@@ -122,17 +122,19 @@ In :numref:`gaussian` (a) the 2D Normal distribution has been plotted, while in 
 drawn from this distribution have been plotted. The color of each point corresponds to the value of the PDF at
 that point. In this case, we know the PDF for the Gaussian density at each point. 
 
-
-
+Next, we shall map the points from the :math:`\mathbf y` space to the :math:`\mathbf z` space using the transformation
+:math:`\mathbf z = f(\mathbf y)`. See part 3 of the calculations above.
 
 .. figure:: https://raw.githubusercontent.com/sankhaMukherjee/normalizingFlows/master/results/img/0001_banana.png
        :align: center
        :name: banana
 
-       The mapping of the points sampled in the gaussian distribution to the banana distribution. Notice
-       that we don't yet know the distribution of the banana distribution, and hence we dont know how
-       to color the points yet.
+       The mapping of the points sampled in the gaussian distribution to the banana distribution. 
 
+Notice that we don't yet know the distribution of the banana distribution, and hence we dont know how to 
+color the points yet. For this, we shall use the formula shown in part 5 of the calculations. Since the
+Jacobian determinant is 1, there is a one-to-one correspondence between the densities of the old point
+and the new points. Let us calculate this density
 
 
 
