@@ -132,7 +132,7 @@ def main():
 
     plt.figure(figsize=(3, 3))
     axs = [
-        plt.axes([0,0,1,1], facecolor='None' ),
+        # plt.axes([0,0,1,1], facecolor='None' ),
         plt.axes([0,0,1,1], facecolor='None' ),
     ]
     for ax in axs:
@@ -140,27 +140,27 @@ def main():
             ax.spines[s].set_visible(False)
             ax.set_xticks([])
             ax.set_yticks([])
-            
-    axs[1].scatter(z[:,0], z[:,1], marker='.', c = 'blue', alpha=0.1, edgecolors='none', zorder=20)
-    axs[1].set_xlim([-4,4])
-    axs[1].set_ylim([-12, 2])
 
-    axs[1].arrow(0,  -11, 0,  12.5, length_includes_head = True, zorder=100, head_length = 0.5, head_width=0.12, fc='k')
-    axs[1].arrow(0,  1.5, 0, -12.5, length_includes_head = True, zorder=100, head_length = 0.5, head_width=0.12, fc='k')
-    axs[1].arrow(-3, 0,  6, 0, length_includes_head = True, zorder=100, head_length = 0.25, head_width=0.2, fc='k')
-    axs[1].arrow( 3, 0, -6, 0, length_includes_head = True, zorder=100, head_length = 0.25, head_width=0.2, fc='k')
+    axs[0].scatter(z[:,0], z[:,1], marker='.', c = 'blue', alpha=0.1, edgecolors='none', zorder=20)
+    axs[0].set_xlim([-4,4])
+    axs[0].set_ylim([-12, 2])
+
+    axs[0].arrow(0,  -11, 0,  12.5, length_includes_head = True, zorder=100, head_length = 0.5, head_width=0.12, fc='k')
+    axs[0].arrow(0,  1.5, 0, -12.5, length_includes_head = True, zorder=100, head_length = 0.5, head_width=0.12, fc='k')
+    axs[0].arrow(-3, 0,  6, 0, length_includes_head = True, zorder=100, head_length = 0.25, head_width=0.2, fc='k')
+    axs[0].arrow( 3, 0, -6, 0, length_includes_head = True, zorder=100, head_length = 0.25, head_width=0.2, fc='k')
 
     for j in np.linspace(-10, -2, 5):
-        axs[1].plot([-0.15, 0.15], [j,j], color='k')
-        axs[1].text( 0.3, j, f'{j}', ha='left', va='center' )
+        axs[0].plot([-0.15, 0.15], [j,j], color='k')
+        axs[0].text( 0.3, j, f'{j}', ha='left', va='center' )
 
     for j in np.linspace(-2, 2, 5):
         if j:
-            axs[1].plot([j, j], [-0.2, 0.2], color='k')
-            axs[1].text( j, -0.35, f'{j}', ha='center', va='top' )
+            axs[0].plot([j, j], [-0.2, 0.2], color='k')
+            axs[0].text( j, -0.35, f'{j}', ha='center', va='top' )
 
-    axs[1].text(3.2, 0, '$z_0$', ha='center', va='center')
-    axs[1].text(0, 1.7, '$z_1$', ha='center', va='center')
+    axs[0].text(3.2, 0, '$z_0$', ha='center', va='center')
+    axs[0].text(0, 1.7, '$z_1$', ha='center', va='center')
 
 
     outFile = 'results/img/0001_banana.png'
