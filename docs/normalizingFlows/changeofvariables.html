@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Mathematical background &mdash; normalizingFlows 0.1.0 documentation</title>
+  <title>Mapping distributions between two random variables &mdash; normalizingFlows 0.1.0 documentation</title>
   
 
   
@@ -42,8 +42,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1D Example" href="1Dexample.html" />
-    <link rel="prev" title="Mathematical background" href="math.html" /> 
+    <link rel="next" title="Flow Examples" href="flowExamples/flowExamples.html" />
+    <link rel="prev" title="K-L Divergence" href="kldivergence.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -92,12 +92,13 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../usage/installation.html">installation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="math.html">Mathematical background</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Mathematical background</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="kldivergence.html">K-L Divergence</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Mapping distributions between two random variables</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#the-change-of-variables-formula">The change of variables formula</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#special-case-1">Special Case 1</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="1Dexample.html">1D Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2DexampleList.html">2D examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flowExamples/flowExamples.html">Flow Examples</a></li>
 </ul>
 </li>
 </ul>
@@ -150,7 +151,7 @@
         
           <li><a href="math.html">Mathematical background</a> &raquo;</li>
         
-      <li>Mathematical background</li>
+      <li>Mapping distributions between two random variables</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -169,14 +170,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="mathematical-background">
-<h1>Mathematical background<a class="headerlink" href="#mathematical-background" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="mapping-distributions-between-two-random-variables">
+<h1>Mapping distributions between two random variables<a class="headerlink" href="#mapping-distributions-between-two-random-variables" title="Permalink to this headline">¶</a></h1>
+<p>Let us suppose that we have two variables <span class="math notranslate nohighlight">\(\mathbf y\)</span> and <span class="math notranslate nohighlight">\(\mathbf z\)</span>. Both of these random variables
+span the <span class="math notranslate nohighlight">\(\mathbb R^n\)</span> space. Furthermore, there is an invertible mapping <span class="math notranslate nohighlight">\(f\)</span> such that
+<span class="math notranslate nohighlight">\(\mathbf z = f(\mathbf y)\)</span> and <span class="math notranslate nohighlight">\(\mathbf y = f^{-1}(\mathbf z)\)</span>. Each of these random variables have
+a probability density function (PDF) <span class="math notranslate nohighlight">\(p_{\mathbf y}(\mathbf y)\)</span> and <span class="math notranslate nohighlight">\(p_{\mathbf z}(\mathbf z)\)</span> over the
+<span class="math notranslate nohighlight">\(\mathbb R^n\)</span> space.</p>
+<p>If we know <span class="math notranslate nohighlight">\(p_{\mathbf y}(\mathbf y)\)</span> very well, and the function <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(f^{-1}\)</span>, can we then
+figure out <span class="math notranslate nohighlight">\(p_{\mathbf z}(\mathbf z)\)</span> easily? The following subsections will explore this idea.</p>
 <div class="section" id="the-change-of-variables-formula">
 <h2>The change of variables formula<a class="headerlink" href="#the-change-of-variables-formula" title="Permalink to this headline">¶</a></h2>
 <p>Assume that there are random variables <span class="math notranslate nohighlight">\(\mathbf y \in \mathbb R^n\)</span>, and <span class="math notranslate nohighlight">\(\mathbf z \in \mathbb R^n\)</span>, such that
 <span class="math notranslate nohighlight">\(\mathbf y = [y_0, y_1, \ldots,y_{n-1}]^T\)</span>, where <span class="math notranslate nohighlight">\(\mathbf y^T\)</span> represents the transpose of <span class="math notranslate nohighlight">\(\mathbf y\)</span>.
 Similarly, assume that <span class="math notranslate nohighlight">\(\mathbf z = [z_0, z_1, \ldots,z_{n-1}]^T\)</span>.</p>
-<p>Now, assume that there is a mapping function <span class="math notranslate nohighlight">\(f: \mathbb R^d \Rightarrow \mathbb R^d\)</span> such
+<p>Now, assume that there is a mapping function <span class="math notranslate nohighlight">\(f: \mathbb R^n \Rightarrow \mathbb R^n\)</span> such
 that <span class="math notranslate nohighlight">\(\mathbf z =f(\mathbf y)\)</span>. Such a mapping function can be represented as:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}z_0 &amp;=  f_0(\mathbf y) \\
@@ -206,6 +214,66 @@ Under these circumstances, the equation <span class="math notranslate nohighligh
 \end{bmatrix}\end{split}\]</div>
 <p>Calculating the determinant of this is significantly difficult in general. We shall look at some simple examples in the subsequent sections.</p>
 </div>
+<div class="section" id="special-case-1">
+<h2>Special Case 1<a class="headerlink" href="#special-case-1" title="Permalink to this headline">¶</a></h2>
+<p>Suppose that the function <span class="math notranslate nohighlight">\(f\)</span> is of a special form shown below</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}z_0     &amp;=  f_0(y_0)               \\
+z_1     &amp;=  f_1(y_0, y_1)          \\
+z_2     &amp;=  f_1(y_0, y_1, y_2)     \\
+\vdots  &amp;=  \vdots                 \\
+z_{n-1} &amp;=  f_{n-1}(y_0, y_1, \cdots, y_{n-1})\end{split}\]</div>
+<p>where the <span class="math notranslate nohighlight">\(i\)</span><sup>th</sup> element of <span class="math notranslate nohighlight">\(\mathbf z\)</span> only depends in <span class="math notranslate nohighlight">\(y_{j \le i}\)</span>. Under such circumstances, the
+Jacobian resembles the following</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\nabla_{\mathbf y}f( \mathbf y  ) =
+\begin{bmatrix}
+       \frac {\partial f_0} {\partial y_0} &amp;
+       0                                   &amp;
+       0                                   &amp;
+       0                                   &amp;
+       \cdots                              &amp;
+       0
+\\
+       \frac {\partial f_1} {\partial y_0} &amp;
+       \frac {\partial f_1} {\partial y_1} &amp;
+       0                                   &amp;
+       0                                   &amp;
+       \cdots                              &amp;
+       0
+\\
+       \frac {\partial f_1} {\partial y_0} &amp;
+       \frac {\partial f_1} {\partial y_1} &amp;
+       \frac {\partial f_2} {\partial y_2} &amp;
+       0                                   &amp;
+       \cdots                              &amp;
+       0
+\\
+       \vdots                              &amp;
+       \cdots                              &amp;
+       \cdots                              &amp;
+       \cdots                              &amp;
+       \cdots                              &amp;
+       0
+\\
+       \frac {\partial f_1} {\partial y_0} &amp;
+       \frac {\partial f_1} {\partial y_1} &amp;
+       \cdots                              &amp;
+       \cdots                              &amp;
+       \cdots                              &amp;
+       \frac {\partial f_{n-1}} {\partial y_{n-1}}
+\\
+\end{bmatrix}\end{split}\]</div>
+<p>Since this is a lower-triangualr matrix, the determinant is simply the product of the diagonal elements.
+Hence, the determinant can be written in this form</p>
+<div class="math notranslate nohighlight">
+\[\det \nabla_{\mathbf y} f(\mathbf y) =
+\prod_{i=0}^{n-1} {
+       \frac {\partial f_i} {\partial y_i}
+}\]</div>
+<p>The compute requirements for this scales as <span class="math notranslate nohighlight">\(\mathcal O(n)\)</span> rather than  <span class="math notranslate nohighlight">\(\mathcal O(n^3)\)</span>, and
+is something that makes normalizing flows practicable.</p>
+</div>
 </div>
 
 
@@ -214,8 +282,8 @@ Under these circumstances, the equation <span class="math notranslate nohighligh
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="1Dexample.html" class="btn btn-neutral float-right" title="1D Example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="math.html" class="btn btn-neutral float-left" title="Mathematical background" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="flowExamples/flowExamples.html" class="btn btn-neutral float-right" title="Flow Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="kldivergence.html" class="btn btn-neutral float-left" title="K-L Divergence" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

@@ -5,6 +5,6 @@ Mathematical background
    :maxdepth: 2
    :caption: Contents:
 
+   kldivergence
    changeofvariables
-   1Dexample
-   2DexampleList
+   flowExamples/flowExamples
