@@ -12,6 +12,7 @@ Welcome to normalizingFlows's documentation!
 
    usage/installation
    normalizingFlows/math
+   lemmas
 
 
 

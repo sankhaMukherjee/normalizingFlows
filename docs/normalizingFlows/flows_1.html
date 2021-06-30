@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>K-L Divergence &mdash; normalizingFlows 0.1.0 documentation</title>
+  <title>Single flow &mdash; normalizingFlows 0.1.0 documentation</title>
   
 
   
@@ -42,8 +42,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Mapping distributions between two random variables" href="changeofvariables.html" />
-    <link rel="prev" title="Mathematical background" href="math.html" /> 
+    <link rel="next" title="Flow Examples" href="flowExamples/flowExamples.html" />
+    <link rel="prev" title="Normalizing Flows" href="flows_0.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -92,13 +92,15 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../usage/installation.html">installation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="math.html">Mathematical background</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">K-L Divergence</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#special-case-1">Special Case 1</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#special-case-2">Special Case 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kldivergence.html">K-L Divergence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changeofvariables.html">Mapping distributions between two random variables</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="flows_0.html">Normalizing Flows</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Single flow</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#single-planar-flow">Single Planar Flow</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="changeofvariables.html">Mapping distributions between two random variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="flows_0.html">Normalizing Flows</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="flowExamples/flowExamples.html">Flow Examples</a></li>
 </ul>
 </li>
@@ -153,13 +155,15 @@
         
           <li><a href="math.html">Mathematical background</a> &raquo;</li>
         
-      <li>K-L Divergence</li>
+          <li><a href="flows_0.html">Normalizing Flows</a> &raquo;</li>
+        
+      <li>Single flow</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/normalizingFlows/kldivergence.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/normalizingFlows/flows_1.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -172,55 +176,42 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="k-l-divergence">
-<h1>K-L Divergence<a class="headerlink" href="#k-l-divergence" title="Permalink to this headline">¶</a></h1>
-<p>The Kullback-Leibler (K-L) Divergence is a measure of the dissimilarity of two
-probability density functions. In this case, we shall concern ourselves with
-the continuous probability distributions. These span the same <span class="math notranslate nohighlight">\(n\)</span>-dimensional
-real space <span class="math notranslate nohighlight">\(\mathbb R^n\)</span>. For the case of discrete distributions, please
-consult relevant literature.</p>
-<p>In this case, we shall assume that there are two probability distributions
-<span class="math notranslate nohighlight">\(p(\mathbf y)\)</span> and <span class="math notranslate nohighlight">\(q(\mathbf y)\)</span>, where <span class="math notranslate nohighlight">\(\mathbf y \in \mathbb R^n\)</span>.
-Let us also suppose that we wish to approximate <span class="math notranslate nohighlight">\(p(\mathbf y)\)</span> with
-<span class="math notranslate nohighlight">\(q(\mathbf y)\)</span>. Under these circumstances, the K-L divergence will provide
-us with a measure of the information lost when we use <span class="math notranslate nohighlight">\(q(\mathbf y)\)</span> instead
-of <span class="math notranslate nohighlight">\(p(\mathbf y)\)</span>. This is given by the formula:</p>
+  <div class="section" id="single-flow">
+<h1>Single flow<a class="headerlink" href="#single-flow" title="Permalink to this headline">¶</a></h1>
+<p>In this first example, consider that you want to transform a latent variable <span class="math notranslate nohighlight">\(\mathbf y\)</span>
+which has a PDF <span class="math notranslate nohighlight">\(q_{\mathbf y}(\mathbf y)\)</span> to another latent variable <span class="math notranslate nohighlight">\(\mathbf z\)</span>
+that has a probability PDF <span class="math notranslate nohighlight">\(q_{\mathbf z}(\mathbf z)\)</span> closer to the density that we
+desire, which happens to be <span class="math notranslate nohighlight">\(p_{\mathbf y}(\mathbf y)\)</span>.
+For this, we should be able to create a function mapping <span class="math notranslate nohighlight">\(f_{\mathbf\theta}\)</span>
+parametrized by <span class="math notranslate nohighlight">\(\mathbf \theta\)</span> such that</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf z = f_{\mathbf \theta}(\mathbf y)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf y = f_{\mathbf \theta}^{-1}(\mathbf z)\)</span></p></li>
+</ol>
+<p>We know that the KL divergence between our desired distribution and the new distribution is
+<span class="math notranslate nohighlight">\(D_{KL}( p_{\mathbf y}(\mathbf y) || q_{\mathbf z}(\mathbf z) )\)</span></p>
+<p>Note that we can, due to the change of variable formula, represent <span class="math notranslate nohighlight">\(q_{\mathbf z}(\mathbf z)\)</span> in
+terms of <span class="math notranslate nohighlight">\(q_{\mathbf y}(\mathbf y)\)</span> as:</p>
 <div class="math notranslate nohighlight">
-\[D_{KL}\left( p(\mathbf y) || q( \mathbf y ) \right) =
-    \int_{-\infty}^{\infty} {
-        p(\mathbf y) \ln
-        \frac {p(\mathbf y)} {q(\mathbf y)}
-        d {\mathbf y}
-    }\]</div>
-<div class="section" id="special-case-1">
-<h2>Special Case 1<a class="headerlink" href="#special-case-1" title="Permalink to this headline">¶</a></h2>
-<p>Suppose you have two multivariate normal distributions <span class="math notranslate nohighlight">\(\mathcal N_0(\mathbf \mu_0, \mathbf \Sigma_0)\)</span>
-and <span class="math notranslate nohighlight">\(\mathcal N_1(\mathbf \mu_1, \mathbf \Sigma_1)\)</span>, with non-singular covariance matrices. Under these
-circumstances, the KL divergence between the two matrices are given as follows:</p>
+\[q_{\mathbf z}(\mathbf z) = q_{\mathbf y}(\mathbf y)
+            \left|
+                \det \mathbf \nabla_{\mathbf y} f_{\theta}(\mathbf y)
+            \right|^{-1}\]</div>
+<p>This means that we should be able to find a set of parameters <span class="math notranslate nohighlight">\(\theta\)</span> such that, minimizing the
+parameters will allow us to find the best-case functional mapping for this new latent space. If we
+substitute this form in the KL divergence, we get the formula</p>
 <div class="math notranslate nohighlight">
-\[D_{KL}( \mathcal N_0 || \mathcal N_1 ) = \frac 1 2 \left(
-    \mathrm {tr} \left( \mathbf \Sigma_1^{-1} \mathbf \Sigma_0   \right) +
-    (\mu_1 - \mu_0)^T \mathbf \Sigma_1^{-1} (\mu_1 - \mu_0)       - k +
-    \ln \left(
-        \frac {\det \mathbf \Sigma_1} {\det \mathbf \Sigma_0}
-    \right)
+\[D_{KL}( p_{\mathbf y}(\mathbf y) || q_{\mathbf z}(\mathbf z) )
+= D_{KL} \left(
+    p_{\mathbf y}(\mathbf y) ||
+    q_{\mathbf y}(\mathbf y)
+                \left|
+                    \det \mathbf \nabla_{\mathbf y} f_{\theta}(\mathbf y)
+                \right|^{-1}
 \right)\]</div>
-</div>
-<div class="section" id="special-case-2">
-<h2>Special Case 2<a class="headerlink" href="#special-case-2" title="Permalink to this headline">¶</a></h2>
-<p>This is a more specific case of Special Case 1. This is the KL divergence between a diagonal multivariate normal
-distribution and a standard normal distribution of the same dimensions is given by</p>
-<div class="math notranslate nohighlight">
-\[D_{KL}\left(
-    \mathcal N \left(
-        \left( \mu_0, \ldots, \mu_{n-1}  \right),
-        \mathrm{diag} \left( \sigma_1^2, \ldots, \sigma_{n-1}^2  \right)
-    \right) ||
-    \mathcal N ( \mathbf 0, \mathbf I )
-\right) = \frac 1 2 \sum_{i=0}^{n-1} {\left(
-    \sigma_i^2 + \mu_i^2 - 1 - \ln( \sigma_i^2 )
-\right)}\]</div>
-<p>This is often used with regard to variational inference, in many places including the variational autoencoder.</p>
+<div class="section" id="single-planar-flow">
+<h2>Single Planar Flow<a class="headerlink" href="#single-planar-flow" title="Permalink to this headline">¶</a></h2>
+<p>Discussion on <a class="reference external" href="https://stats.stackexchange.com/questions/465184/planar-flow-in-normalizing-flows">Planar Flow Intuition</a> provides valuable intuition to planar flows.</p>
 </div>
 </div>
 
@@ -230,8 +221,8 @@ distribution and a standard normal distribution of the same dimensions is given 
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="changeofvariables.html" class="btn btn-neutral float-right" title="Mapping distributions between two random variables" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="math.html" class="btn btn-neutral float-left" title="Mathematical background" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="flowExamples/flowExamples.html" class="btn btn-neutral float-right" title="Flow Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="flows_0.html" class="btn btn-neutral float-left" title="Normalizing Flows" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

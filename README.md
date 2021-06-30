@@ -37,3 +37,4 @@ Documentation for the different parts of the project is present here:
 11. Ar𝛘iv [Normalizing Flows for Probabilistic Modeling and Inference](https://arxiv.org/pdf/1912.02762.pdf)
 12. openreview [ariational Refinement for Importance SamplingUsing the Forward Kullback-Leibler Divergence](https://openreview.net/pdf?id=67p4Qb3fe4k)
 13. GitHub [Normalizing Flows](https://github.com/sankhaMukherjee/densityNN/blob/master/notebooks/Planar%20flow.ipynb)
+14. Blog [Building Probability Distributions with the TensorFlow Probability Bijector API](https://tiao.io/post/building-probability-distributions-with-tensorflow-probability-bijector-api/)

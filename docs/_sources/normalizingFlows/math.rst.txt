@@ -7,4 +7,5 @@ Mathematical background
 
    kldivergence
    changeofvariables
+   flows_0
    flowExamples/flowExamples

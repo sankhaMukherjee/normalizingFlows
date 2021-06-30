@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Welcome to normalizingFlows’s documentation! &mdash; normalizingFlows 0.1.0 documentation</title>
+  <title>Important Theorems and Lemmas &mdash; normalizingFlows 0.1.0 documentation</title>
   
 
   
@@ -35,13 +35,14 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="installation" href="usage/installation.html" /> 
+    <link rel="prev" title="Gaussian to banana distributions" href="normalizingFlows/flowExamples/2Dexamples/example1.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -55,7 +56,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> normalizingFlows
+            <a href="index.html" class="icon icon-home"> normalizingFlows
           
 
           
@@ -87,10 +88,15 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage/installation.html">installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="normalizingFlows/math.html">Mathematical background</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lemmas.html">Important Theorems and Lemmas</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Important Theorems and Lemmas</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#matrix-determinant-lemma">1. Matrix Determinant Lemma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mean-field-approximation">2. Mean Field Approximation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#k-l-divergence-to-elbo">3. K-L Divergence to ELBO</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -106,7 +112,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">normalizingFlows</a>
+          <a href="index.html">normalizingFlows</a>
         
       </nav>
 
@@ -137,15 +143,15 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Welcome to normalizingFlows’s documentation!</li>
+      <li>Important Theorems and Lemmas</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/lemmas.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -158,35 +164,23 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="welcome-to-normalizingflows-s-documentation">
-<h1>Welcome to normalizingFlows’s documentation!<a class="headerlink" href="#welcome-to-normalizingflows-s-documentation" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="usage/installation.html">installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="normalizingFlows/math.html">Mathematical background</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="normalizingFlows/kldivergence.html">K-L Divergence</a></li>
-<li class="toctree-l2"><a class="reference internal" href="normalizingFlows/changeofvariables.html">Mapping distributions between two random variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="normalizingFlows/flows_0.html">Normalizing Flows</a></li>
-<li class="toctree-l2"><a class="reference internal" href="normalizingFlows/flowExamples/flowExamples.html">Flow Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="lemmas.html">Important Theorems and Lemmas</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="lemmas.html#matrix-determinant-lemma">1. Matrix Determinant Lemma</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lemmas.html#mean-field-approximation">2. Mean Field Approximation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lemmas.html#k-l-divergence-to-elbo">3. K-L Divergence to ELBO</a></li>
-</ul>
-</li>
-</ul>
+  <div class="section" id="important-theorems-and-lemmas">
+<h1>Important Theorems and Lemmas<a class="headerlink" href="#important-theorems-and-lemmas" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="matrix-determinant-lemma">
+<h2>1. Matrix Determinant Lemma<a class="headerlink" href="#matrix-determinant-lemma" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[\det (\mathbf I + \mathbf u \mathbf v^T ) =
+(1 + \mathbf v^T \mathbf u)\]</div>
 </div>
+<div class="section" id="mean-field-approximation">
+<h2>2. Mean Field Approximation<a class="headerlink" href="#mean-field-approximation" title="Permalink to this headline">¶</a></h2>
+<p>if <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are independent</p>
+<div class="math notranslate nohighlight">
+\[p(A,B) = p(A)p(B)\]</div>
 </div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
-</ul>
+<div class="section" id="k-l-divergence-to-elbo">
+<h2>3. K-L Divergence to ELBO<a class="headerlink" href="#k-l-divergence-to-elbo" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
 
@@ -195,7 +189,7 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="usage/installation.html" class="btn btn-neutral float-right" title="installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="normalizingFlows/flowExamples/2Dexamples/example1.html" class="btn btn-neutral float-left" title="Gaussian to banana distributions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

@@ -11,5 +11,11 @@ pushdocs:
 	git commit -m 'updated documentation'
 	git push origin master
 
-run:
+banana:
 	python3 src/examples/banana-npy.py
+
+planarFlowTarget:
+	python3 src/examples/planarFlows/target.py
+
+run:
+	python3 src/examples/planarFlows/experiment.py
