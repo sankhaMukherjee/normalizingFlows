@@ -27,11 +27,13 @@ class Flow(Model):
         temp = np.array(0).astype(np.float32)
         tupleVal = (z0, temp)
 
+        zks = [z0.numpy()]
         for flow in self.flows:
             tupleVal = flow(tupleVal)
+            zks.append( tupleVal[0].numpy() )
         zk, ldj = tupleVal
 
-        return z0, zk, ldj, self.mu, self.logVar
+        return zks, ldj, self.mu, self.logVar
 
     def targetDensityTF(self, z):
 
@@ -43,6 +45,17 @@ class Flow(Model):
         exp  = tf.math.log( exp1 + exp2 )
 
         return tf.math.exp(exp - norm1)
+
+    def targetDensityTFLogit(self, z):
+
+        norm  = tf.norm(z, axis=1)
+        norm1 = 0.5 * (( norm - 4 )/0.4)**2
+
+        exp1 = tf.math.exp( -0.2 * ( (z[:,0] - 2)/0.8 )**2 )
+        exp2 = tf.math.exp( -0.2 * ( (z[:,0] + 2)/0.8 )**2 )
+        exp  = tf.math.log( exp1 + exp2 )
+
+        return (exp - norm1)
 
     def step(self, shape, beta=1):
 
@@ -62,13 +75,12 @@ class Flow(Model):
             # Qz0
             logQz0 = -tf.math.reduce_sum(eps**2)
             # Qzk = Qz0 + sum(log det jac)
-            # logQzk = tf.math.reduce_sum(logQz0) - tf.math.reduce_sum(ldj)
             logQzk = -tf.math.reduce_sum(ldj)
             # P(x|z)
-            nll = -tf.math.reduce_sum(tf.math.log(self.targetDensityTF(zk) + 1e-7)) 
+            nll = -tf.math.reduce_sum(self.targetDensityTFLogit(zk) + 1e-7)
 
 
-            totalLoss = ( -logQz0 + logQzk + beta * nll) /shape[0]
+            totalLoss = ( logQz0 + logQzk + beta * nll) /shape[0]
 
             # Optimize
             grads = tape.gradient(totalLoss, self.trainable_weights)
