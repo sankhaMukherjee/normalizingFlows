@@ -45,7 +45,7 @@ class Planar(layers.Layer):
 
         # Calculate f(z)
         wu    = self.w @ tf.transpose(self.u)
-        unitW = self.w / tf.norm(self.w)
+        unitW = self.w / tf.norm(self.w) **2
         unitU = self.u + (tf.math.softplus(wu) - 1 - wu) * unitW
         wzb   = z @ tf.transpose(self.w) + self.b
         fz    = z + (unitU * tf.math.tanh(wzb))

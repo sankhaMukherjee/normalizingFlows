@@ -42,9 +42,10 @@ def plotScatterMany(zks, now, epoch=0, nFlows=1):
         ax.set_ylim([-10, 10])
         ax.set_xticks([])
         ax.set_yticks([])
-        label = '$z_{' + f'{i}' + '}$'
-        ax.text( -7, 7, label )
-    
+        if i < N:
+            label = '$z_{' + f'{i}' + '}$'
+            ax.text( -7, 7, label )
+        
     plt.savefig(f'results/img/temp/{now}_z_{epoch:06d}_{nFlows:06d}.png')
     plt.close()
 

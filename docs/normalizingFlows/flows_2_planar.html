@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Flow Basics &mdash; normalizingFlows 0.1.0 documentation</title>
+  <title>Planar Flow &mdash; normalizingFlows 0.1.0 documentation</title>
   
 
   
@@ -42,8 +42,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Planar Flow" href="flows_2_planar.html" />
-    <link rel="prev" title="Normalizing Flows" href="flows_0.html" /> 
+    <link rel="next" title="Flow Examples" href="flowExamples/flowExamples.html" />
+    <link rel="prev" title="Flow Basics" href="flows_1.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -95,11 +95,8 @@
 <li class="toctree-l2"><a class="reference internal" href="kldivergence.html">K-L Divergence</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changeofvariables.html">Mapping distributions between two random variables</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="flows_0.html">Normalizing Flows</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Flow Basics</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#concateanted-flows">Concateanted Flows</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="flows_2_planar.html">Planar Flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flows_1.html">Flow Basics</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Planar Flow</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="flowExamples/flowExamples.html">Flow Examples</a></li>
@@ -158,13 +155,13 @@
         
           <li><a href="flows_0.html">Normalizing Flows</a> &raquo;</li>
         
-      <li>Flow Basics</li>
+      <li>Planar Flow</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/normalizingFlows/flows_1.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/normalizingFlows/flows_2_planar.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -177,66 +174,56 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="flow-basics">
-<h1>Flow Basics<a class="headerlink" href="#flow-basics" title="Permalink to this headline">¶</a></h1>
-<p>In this first example, consider that you want to transform a latent variable <span class="math notranslate nohighlight">\(\mathbf y\)</span>
-which has a PDF <span class="math notranslate nohighlight">\(q_{\mathbf y}(\mathbf y)\)</span> to another latent variable <span class="math notranslate nohighlight">\(\mathbf z\)</span>
-that has a probability PDF <span class="math notranslate nohighlight">\(q_{\mathbf z}(\mathbf z)\)</span> closer to the density that we
-desire, which happens to be <span class="math notranslate nohighlight">\(p_{\mathbf y}(\mathbf y)\)</span>.
-For this, we should be able to create a function mapping <span class="math notranslate nohighlight">\(f_{\mathbf\theta}\)</span>
-parametrized by <span class="math notranslate nohighlight">\(\mathbf \theta\)</span> such that</p>
-<ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(\mathbf z = f_{\mathbf \theta}(\mathbf y)\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbf y = f_{\mathbf \theta}^{-1}(\mathbf z)\)</span></p></li>
-</ol>
-<p>We know that the KL divergence between our desired distribution and the new distribution is
-<span class="math notranslate nohighlight">\(D_{KL}( p_{\mathbf y}(\mathbf y) || q_{\mathbf z}(\mathbf z) )\)</span></p>
-<p>Note that we can, due to the change of variable formula, represent <span class="math notranslate nohighlight">\(q_{\mathbf z}(\mathbf z)\)</span> in
-terms of <span class="math notranslate nohighlight">\(q_{\mathbf y}(\mathbf y)\)</span> as:</p>
+  <div class="section" id="planar-flow">
+<h1>Planar Flow<a class="headerlink" href="#planar-flow" title="Permalink to this headline">¶</a></h1>
+<p>An example function for such a flow is given by what is called a planar flow.</p>
+<p>Discussion on <a class="reference external" href="https://stats.stackexchange.com/questions/465184/planar-flow-in-normalizing-flows">Planar Flow Intuition</a> provides valuable intuition to planar flows. The mathematical
+details are present in the paper <a class="reference external" href="https://arxiv.org/pdf/1505.05770.pdf">Variational Inference with Normalizing Flows</a>, wherein the authors
+discuss a aprticular</p>
+<p>Planar flows rely on invertible planar transformations. See Section 4.1. of <a class="reference external" href="https://arxiv.org/pdf/1505.05770.pdf">Variational Inference with Normalizing Flows</a>.
+This comprises of the transformations</p>
 <div class="math notranslate nohighlight">
-\[q_{\mathbf z}(\mathbf z) = q_{\mathbf y}(\mathbf y)
-            \left|
-                \det \mathbf \nabla_{\mathbf y} f_{\theta}(\mathbf y)
-            \right|^{-1}\]</div>
-<p>This means that we should be able to find a set of parameters <span class="math notranslate nohighlight">\(\theta\)</span> such that, minimizing the
-parameters will allow us to find the best-case functional mapping for this new latent space. If we
-substitute this form in the KL divergence, we get the formula</p>
+\[f(\mathbf z) = \mathbf z + \mathbf u h( \mathbf w^T\mathbf z + b )\]</div>
+<p>here, <span class="math notranslate nohighlight">\(\mathbf w \in \mathbb R^n\)</span>, <span class="math notranslate nohighlight">\(\mathbf u \in \mathbb R^n\)</span>, and <span class="math notranslate nohighlight">\(b \in \mathbb R\)</span>.
+<span class="math notranslate nohighlight">\(h(\cdot)\)</span> is a nonlinearity such as <span class="math notranslate nohighlight">\(\mathrm {tanh}(\cdot)\)</span>.</p>
+<p>The important thing about this specific transformation is that the matrix determinant is invertible under certain
+circumstances, and it is possible to find a closed-form solution to this. Given that <span class="math notranslate nohighlight">\(h'()\)</span> is the derivative
+of the function <span class="math notranslate nohighlight">\(h()\)</span>, the derivative can be calculated as:</p>
 <div class="math notranslate nohighlight">
-\[D_{KL}( p_{\mathbf y}(\mathbf y) || q_{\mathbf z}(\mathbf z) )
-= D_{KL} \left(
-    p_{\mathbf y}(\mathbf y) ||
-    q_{\mathbf y}(\mathbf y)
-                \left|
-                    \det \mathbf \nabla_{\mathbf y} f_{\theta}(\mathbf y)
-                \right|^{-1}
-\right)\]</div>
-<div class="section" id="concateanted-flows">
-<h2>Concateanted Flows<a class="headerlink" href="#concateanted-flows" title="Permalink to this headline">¶</a></h2>
-<p>When multiple flows are concatenated one after another, we arrive at what is called multiple flows. Instead of
-mapping from <span class="math notranslate nohighlight">\(\mathbf y\)</span> to <span class="math notranslate nohighlight">\(\mathbf z\)</span>, we shall make a series of mappings from <span class="math notranslate nohighlight">\(\mathbf z\)</span>
-to <span class="math notranslate nohighlight">\(\mathbf z_1\)</span>, then to <span class="math notranslate nohighlight">\(\mathbf z_2\)</span>, all the way to <span class="math notranslate nohighlight">\(\mathbf z_K\)</span>, in the manner shown below.</p>
+\[\nabla_{\mathbf z} f( \mathbf z ) =
+        \mathbf I + \mathbf u h'( \mathbf w ^T \mathbf z + b) \mathbf w\]</div>
+<p>Fnally, the determinant can be calculated using the amtrix determinant lemma
+<span class="math notranslate nohighlight">\(\det (\mathbf I + \mathbf u \mathbf v^T) = (1 + \mathbf u^T \mathbf v)\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\mathbf z_K = f_{K} \circ f_{K-2} \circ \cdots \circ f_1 (\mathbf z_0)\]</div>
-<p>It is then trivial to see that the expression for the distribution function will be given by</p>
+\[\begin{split}\left| \det \nabla_{\mathbf z} f( \mathbf z )  \right| &amp;=
+    | \det
+            \left(
+                \mathbf I + \mathbf u h'( \mathbf w^T \mathbf z + b ) \mathbf w^T
+            \right)
+    | \\ &amp;=
+    |
+        \left(
+            1 +  \mathbf u ^T h'( \mathbf w^T \mathbf z + b ) \mathbf w
+        \right)
+    |\end{split}\]</div>
+<p>Depending upon the nonlinearity chosen, it is possible that the function to not be invertible. However, this
+condition can be satsified if <span class="math notranslate nohighlight">\(\mathbf w^T \mathbf u \ge -1\)</span>. Rather than using this equation then,
+a slight modification of the equation is used wherein, instead of using the vector <span class="math notranslate nohighlight">\(\mathbf u\)</span>, a
+slightly modified version of <span class="math notranslate nohighlight">\(\mathbf u\)</span> given by <span class="math notranslate nohighlight">\(\hat {\mathbf u}(\mathbf u, \mathbf w)\)</span> is
+used, given by the equations
+<span class="math notranslate nohighlight">\(\hat {\mathbf u}(\mathbf u, \mathbf w) = \mathbf u + \left[ m(\mathbf w^T \mathbf u) - \mathbf w^T \mathbf u \right]\)</span>,
+where <span class="math notranslate nohighlight">\(m(x) = -1 + \log( 1 + e^x )\)</span>. See Appendix A for all the mathematical details.</p>
+<p>Just like what has been shown above, one can apply one function after another as shown below:</p>
 <div class="math notranslate nohighlight">
-\[q(\mathbf z_K) = q(\mathbf z)
-                \prod_{k=1}^{K}
-                |
-                    \det \mathbf \nabla_{\mathbf z_{k}} f_{\theta}(\mathbf z_k)
-                | ^{-1}\]</div>
-<p>Generally though, this is written after taking a <span class="math notranslate nohighlight">\(\log\)</span> on both sides, wherin the product becomes a sum. This
-form is typically favoured for numerical stability. For the case of the flow, the KL divergence then becomes</p>
+\[\mathbf z_K = f_{K} \circ f_{K-2} \circ \cdots \circ f_1 (\mathbf z)\]</div>
+<p>The log-likelihood of such a distribution is then simply given by the equation</p>
 <div class="math notranslate nohighlight">
-\[D_{KL}( p(\mathbf z) || q(\mathbf z) )
-= D_{KL} \left(
-    p(\mathbf z) ||
-    q(\mathbf z)
-                \prod_{k=1}^{K}
-                |
-                    \det \mathbf \nabla_{\mathbf z_{k}} f_{\theta}(\mathbf z_k)
-                | ^{-1}
-\right)\]</div>
-</div>
+\[\log q_K(\mathbf z_K) = \log q_0( \mathbf z )
+    - \sum_{k=1}^{K} {
+        \log \left|
+            1 +  \hat {\mathbf u}_k ^T h'( \mathbf w_k^T \mathbf z_{k-1} + b ) \mathbf w_k
+        \right|
+    }\]</div>
 </div>
 
 
@@ -245,8 +232,8 @@ form is typically favoured for numerical stability. For the case of the flow, th
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="flows_2_planar.html" class="btn btn-neutral float-right" title="Planar Flow" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="flows_0.html" class="btn btn-neutral float-left" title="Normalizing Flows" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="flowExamples/flowExamples.html" class="btn btn-neutral float-right" title="Flow Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="flows_1.html" class="btn btn-neutral float-left" title="Flow Basics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

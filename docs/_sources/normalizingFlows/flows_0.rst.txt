@@ -9,3 +9,4 @@ we can generate complex flows from simple flows.
    :caption: Types of flows
 
    flows_1
+   flows_2_planar

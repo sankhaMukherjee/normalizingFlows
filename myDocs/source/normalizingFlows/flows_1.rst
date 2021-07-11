@@ -1,4 +1,4 @@
-Single flow
+Flow Basics
 ===============
 
 In this first example, consider that you want to transform a latent variable :math:`\mathbf y` 
@@ -40,13 +40,38 @@ substitute this form in the KL divergence, we get the formula
     \right)
 
 
-Single Planar Flow 
+Concateanted Flows 
 ------------------------
 
-An example function for such a flow is given by what is called a planar flow. 
+When multiple flows are concatenated one after another, we arrive at what is called multiple flows. Instead of
+mapping from :math:`\mathbf y` to :math:`\mathbf z`, we shall make a series of mappings from :math:`\mathbf z`
+to :math:`\mathbf z_1`, then to :math:`\mathbf z_2`, all the way to :math:`\mathbf z_K`, in the manner shown below.
 
-Discussion on `Planar Flow Intuition`_ provides valuable intuition to planar flows. 
+.. math::
 
+    \mathbf z_K = f_{K} \circ f_{K-2} \circ \cdots \circ f_1 (\mathbf z_0)
 
-.. _Planar Flow Intuition: https://stats.stackexchange.com/questions/465184/planar-flow-in-normalizing-flows
+It is then trivial to see that the expression for the distribution function will be given by
 
+.. math::
+
+    q(\mathbf z_K) = q(\mathbf z)
+                    \prod_{k=1}^{K} 
+                    |
+                        \det \mathbf \nabla_{\mathbf z_{k}} f_{\theta}(\mathbf z_k)
+                    | ^{-1}
+
+Generally though, this is written after taking a :math:`\log` on both sides, wherin the product becomes a sum. This
+form is typically favoured for numerical stability. For the case of the flow, the KL divergence then becomes
+
+.. math::
+
+    D_{KL}( p(\mathbf z) || q(\mathbf z) )
+    = D_{KL} \left( 
+        p(\mathbf z) || 
+        q(\mathbf z)
+                    \prod_{k=1}^{K} 
+                    |
+                        \det \mathbf \nabla_{\mathbf z_{k}} f_{\theta}(\mathbf z_k)
+                    | ^{-1}
+    \right)
