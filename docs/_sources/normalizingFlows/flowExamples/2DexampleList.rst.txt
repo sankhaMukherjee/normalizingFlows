@@ -9,3 +9,4 @@ have been mastered, it is then subsequently trivial to master :math:`n`-D transf
    :caption: Contents:
 
    2Dexamples/example1
+   2Dexamples/example2

@@ -66,7 +66,7 @@ def main():
     
     for ax in axs:
         for s in ['right', 'top', 'left', 'bottom']:
-            ax.spines[s].set_visible(True)
+            ax.spines[s].set_visible(False)
         ax.set_xticks([])
         ax.set_yticks([])
         ax.set_xlim([-8, 8])
