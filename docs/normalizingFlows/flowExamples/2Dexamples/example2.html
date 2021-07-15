@@ -35,6 +35,7 @@
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -181,12 +182,55 @@
             
   <div class="section" id="d-planar-flow-example">
 <h1>2D Planar Flow Example<a class="headerlink" href="#d-planar-flow-example" title="Permalink to this headline">¶</a></h1>
-<p>In this Section, the target distribution that we are trying to approximate will be defined.</p>
+<p>In this section, we shall see how we can start with one funciton <span class="math notranslate nohighlight">\(f(\mathbf z)\)</span>, and through a
+series of transformations defined by</p>
+<div class="math notranslate nohighlight">
+\[\mathbf z_K = f_{K} \circ f_{K-2} \circ \cdots \circ f_1 (\mathbf z_0)\]</div>
+<p>obtain a <span class="math notranslate nohighlight">\(\mathbf z_K\)</span> such that the probability density of these points <span class="math notranslate nohighlight">\(p(\mathbf z_K)\)</span> approaches
+the probability of the target density <span class="math notranslate nohighlight">\(q(\mathbf z_K)\)</span>. The target distribution that we are trying to approximate
+is given by the following formula.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}q_1(\mathbf z_K) &amp;= \log \left[
+    \exp \left(
+        -0.2 * \frac {\left( z_0 - 2 \right)^2} {0.8^2}
+    \right) +
+    \exp \left(
+        -0.2 * \frac {\left( z_0 + 2 \right)^2} {0.8^2}
+    \right)
+\right] \\
+q_2(\mathbf z_K) &amp;= \frac 1 2
+    \left[
+        \frac {\|z\| - 4} {0.4}
+    \right] ^ 2 \\
+q(\mathbf z_K) &amp;= \exp \left( q_2(\mathbf z_K) - q_1(\mathbf z_K) \right)\end{split}\]</div>
+<p>And is plotted in the figure below.</p>
 <div class="figure align-center" id="target">
 <img alt="https://raw.githubusercontent.com/sankhaMukherjee/normalizingFlows/master/results/img/target.png" src="https://raw.githubusercontent.com/sankhaMukherjee/normalizingFlows/master/results/img/target.png" />
-<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">A contour plot of the target distribution has been plotted. This is a 2D distribution.</span><a class="headerlink" href="#target" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">A contour plot of the target distribution <span class="math notranslate nohighlight">\(q(\mathbf z)\)</span> that we are trying to approximate
+has been plotted.</span><a class="headerlink" href="#target" title="Permalink to this image">¶</a></p>
 </div>
-<p>In this case, the target density will be a fairly complex density. This is shown in <a class="reference internal" href="#target"><span class="std std-numref">Fig. 4</span></a>.</p>
+<p>In this case, the target density will be a fairly complex density. This is shown in <a class="reference internal" href="#target"><span class="std std-numref">Fig. 4</span></a>. we shall
+start with an initial distribution <span class="math notranslate nohighlight">\(p(\mathbf z) = \mathcal N( \mathbf I, \mathbf 0 )\)</span>, which happens to
+be a unit normal distribution. The reason for using this distribiution is that the distribution characteristics
+are pretty easy to calculate.</p>
+<p>Now, as mentioned in the Section <a class="reference internal" href="../../flows_2_planar.html#planar-flow"><span class="std std-ref">Planar Flow</span></a> that the distribution of the flow after the transformation is givn by</p>
+<div class="math notranslate nohighlight">
+\[\log p(\mathbf z_K) = \log p( \mathbf z )
+    - \sum_{k=1}^{K} {
+        \log |
+            1 +  \hat {\mathbf u}_k ^T h'( \mathbf w_k^T \mathbf z_{k-1} + b ) \mathbf w_k
+        |
+    }\]</div>
+<p>The TensorFlow 2 implementation of a planar layer is described in
+<a class="reference external" href="https://github.com/sankhaMukherjee/normalizingFlows/blob/master/src/examples/planarFlows/Planar.py">Planar.py</a>, while
+that of the planar flow model is described in
+<a class="reference external" href="https://github.com/sankhaMukherjee/normalizingFlows/blob/master/src/examples/planarFlows/Flow.py">Flow.py</a>. The entire
+example is present in the
+<a class="reference external" href="https://github.com/sankhaMukherjee/normalizingFlows/tree/master/src/examples/planarFlows">folder</a>. To approximate the
+function <span class="math notranslate nohighlight">\(q( \mathbf z )\)</span> with the approximate density <span class="math notranslate nohighlight">\(p(\mathbf z_K)\)</span>, we shall just reduce the variational
+free energy between the two quantities, and minimize the loss function</p>
+<div class="math notranslate nohighlight">
+\[\mathcal L = \mathbb E \left[ \log q(\mathbf z_K) - \log p( \mathbf z_K ) \right]\]</div>
 </div>
 
 

@@ -77,10 +77,10 @@ class Flow(Model):
             # Qzk = Qz0 + sum(log det jac)
             logQzk = -tf.math.reduce_sum(ldj)
             # P(x|z)
-            nll = -tf.math.reduce_sum(self.targetDensityTFLogit(zk) + 1e-7)
+            target = -tf.math.reduce_sum(self.targetDensityTFLogit(zk) + 1e-7)
 
 
-            totalLoss = ( logQz0 + logQzk + beta * nll) /shape[0]
+            totalLoss = ( logQz0 + logQzk + beta * target) /shape[0]
 
             # Optimize
             grads = tape.gradient(totalLoss, self.trainable_weights)
